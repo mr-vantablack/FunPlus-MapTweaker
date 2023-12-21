@@ -231,6 +231,22 @@ namespace FunPlus_MapTweaker
             UpdateValues();
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string defaultPath = AppDomain.CurrentDomain.BaseDirectory + @"\default.json";
+            if (File.Exists(defaultPath))
+            {
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true,
+                    IncludeFields = true
+                };
+                string json = File.ReadAllText(defaultPath);
+                waves = JsonSerializer.Deserialize<List<CustomWave>>(json, options);
+                UpdateValues();
+            }
+        }
+
         private void sceneTextBox_TextChanged(object sender, EventArgs e)
         {
             sceneName = sceneTextBox.Text;
