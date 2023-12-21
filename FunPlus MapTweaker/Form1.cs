@@ -15,7 +15,7 @@ namespace FunPlus_MapTweaker
         int mapSize = 0;
         string[] monster = new string[] { "TinkyWinky", "PlayerTinky", "BossTinky" };
         public List<CustomWave> waves = new List<CustomWave>();
-        public int wave = 0;
+        public int wave = 1;
         public Form1()
         {
             InitializeComponent();
@@ -25,7 +25,7 @@ namespace FunPlus_MapTweaker
             surCombo.SelectedIndex = 0;
             AddWave(10, 15, "NewBorn_Bot", new CustomWave.specialNPC[] { new CustomWave.specialNPC() { npcName = "NewBorn_Runner_Bot", spawnChance = 6 } });
            // AddWave(20, 15, "NewBorn_Bot", new CustomWave.specialNPC[] { new CustomWave.specialNPC() { npcName = "NewBorn_Runner_Bot", spawnChance = 4 } });
-            NextWave();
+            UpdateValues();
         }
 
         private void AddWave(int npcCount, int maxNpc, string defaultNpc, CustomWave.specialNPC[] npcs)
@@ -37,6 +37,19 @@ namespace FunPlus_MapTweaker
             wave.waveInfo.totalCount = npcCount;
             wave.waveInfo.npc = npcs;
             waves.Add(wave);
+        }
+        private void UpdateValues()
+        {
+            var w = waves[wave - 1];
+            waveTextbox.Text = wave.ToString() + " / " + waves.Count.ToString();
+            defaultNPCname.Text = w.waveInfo.defaultNPC;
+            maxNPCnum.Value = w.maxNPC;
+            countNum.Value = w.waveInfo.totalCount;
+            specialNPClist.Items.Clear();
+            foreach (CustomWave.specialNPC npc in w.waveInfo.npc)
+            {
+                specialNPClist.Items.Add($"{npc.npcName}|{npc.spawnChance}|{npc.isBoss}");
+            }
         }
         private void SaveValues()
         {
@@ -57,32 +70,14 @@ namespace FunPlus_MapTweaker
             SaveValues();
             if (wave == waves.Count) return;
             wave++;
-            var w = waves[wave - 1];
-            waveTextbox.Text = wave.ToString() + " / " + waves.Count.ToString();
-            defaultNPCname.Text = w.waveInfo.defaultNPC;
-            maxNPCnum.Value = w.maxNPC;
-            countNum.Value = w.waveInfo.totalCount;
-            specialNPClist.Items.Clear();
-            foreach (CustomWave.specialNPC npc in w.waveInfo.npc)
-            {
-                specialNPClist.Items.Add($"{npc.npcName}|{npc.spawnChance}|{npc.isBoss}");
-            }
+            UpdateValues();
         }
         private void PrevWave()
         {
             SaveValues();
             if (wave <= 1) return;
             wave--;
-            var w = waves[wave - 1];
-            waveTextbox.Text = wave.ToString() + " / " + waves.Count.ToString();
-            defaultNPCname.Text = w.waveInfo.defaultNPC;
-            maxNPCnum.Value = w.maxNPC;
-            countNum.Value = w.waveInfo.totalCount;
-            specialNPClist.Items.Clear();
-            foreach (CustomWave.specialNPC npc in w.waveInfo.npc)
-            {
-                specialNPClist.Items.Add($"{npc.npcName}|{npc.spawnChance}|{npc.isBoss}");
-            }
+            UpdateValues();
         }
         private void RemoveWave()
         {
@@ -93,7 +88,7 @@ namespace FunPlus_MapTweaker
         {
             SaveValues();
             wave = waves.Count + 1;
-            AddWave(20, 15, "NewBorn_Bot", new CustomWave.specialNPC[] { new CustomWave.specialNPC() { npcName = "NewBorn_Runner_Bot", spawnChance = 4 } });
+            AddWave(10, 15, "NewBorn_Bot", new CustomWave.specialNPC[] { new CustomWave.specialNPC() { npcName = "NewBorn_Runner_Bot", spawnChance = 4 } });
             waveTextbox.Text = wave.ToString() + " / " + waves.Count.ToString();
         }
         private void waveRemoveButton_Click(object sender, EventArgs e)
@@ -212,6 +207,30 @@ namespace FunPlus_MapTweaker
                // MessageBox.Show(json);
             }
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true,
+                    IncludeFields = true
+                };
+                string json = File.ReadAllText(openFileDialog1.FileName);
+                waves = JsonSerializer.Deserialize<List<CustomWave>>(json, options);
+                UpdateValues();
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            waves.Clear();
+            wave = 1;
+            AddWave(10, 15, "NewBorn_Bot", new CustomWave.specialNPC[] { new CustomWave.specialNPC() { npcName = "NewBorn_Runner_Bot", spawnChance = 4 } });
+            UpdateValues();
+        }
+
         private void sceneTextBox_TextChanged(object sender, EventArgs e)
         {
             sceneName = sceneTextBox.Text;

@@ -30,7 +30,6 @@
         {
             this.sceneTextBox = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button3 = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.buildButton = new System.Windows.Forms.Button();
@@ -45,8 +44,12 @@
             this.sizeCombo = new System.Windows.Forms.ComboBox();
             this.outsideCheckBox = new System.Windows.Forms.CheckBox();
             this.MapNameLabel = new System.Windows.Forms.Label();
+            this.button3 = new System.Windows.Forms.Button();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.customWavesGroup = new System.Windows.Forms.GroupBox();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.waveTextbox = new System.Windows.Forms.TextBox();
             this.waveRemoveButton = new System.Windows.Forms.Button();
             this.waveAddButton = new System.Windows.Forms.Button();
@@ -69,6 +72,7 @@
             this.label9 = new System.Windows.Forms.Label();
             this.maxNPCnum = new System.Windows.Forms.NumericUpDown();
             this.saveFileDialog2 = new System.Windows.Forms.SaveFileDialog();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.groupBox1.SuspendLayout();
             this.customWavesGroup.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -88,7 +92,6 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.button3);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.textBox1);
             this.groupBox1.Controls.Add(this.buildButton);
@@ -106,20 +109,10 @@
             this.groupBox1.Controls.Add(this.sceneTextBox);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(191, 395);
+            this.groupBox1.Size = new System.Drawing.Size(191, 369);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "MapTweaker";
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(6, 331);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(180, 46);
-            this.button3.TabIndex = 15;
-            this.button3.Text = "Create waves.json";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // label5
             // 
@@ -140,7 +133,7 @@
             // 
             // buildButton
             // 
-            this.buildButton.Location = new System.Drawing.Point(6, 279);
+            this.buildButton.Location = new System.Drawing.Point(6, 317);
             this.buildButton.Name = "buildButton";
             this.buildButton.Size = new System.Drawing.Size(180, 46);
             this.buildButton.TabIndex = 12;
@@ -332,12 +325,26 @@
             this.MapNameLabel.TabIndex = 1;
             this.MapNameLabel.Text = "Scene name";
             // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(142, 16);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 15;
+            this.button3.Text = "Save";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
             // saveFileDialog1
             // 
             this.saveFileDialog1.FileName = "map.ini";
             // 
             // customWavesGroup
             // 
+            this.customWavesGroup.Controls.Add(this.button4);
+            this.customWavesGroup.Controls.Add(this.button3);
+            this.customWavesGroup.Controls.Add(this.button2);
+            this.customWavesGroup.Controls.Add(this.button1);
             this.customWavesGroup.Controls.Add(this.waveTextbox);
             this.customWavesGroup.Controls.Add(this.waveRemoveButton);
             this.customWavesGroup.Controls.Add(this.waveAddButton);
@@ -346,24 +353,54 @@
             this.customWavesGroup.Controls.Add(this.groupBox3);
             this.customWavesGroup.Location = new System.Drawing.Point(209, 12);
             this.customWavesGroup.Name = "customWavesGroup";
-            this.customWavesGroup.Size = new System.Drawing.Size(466, 375);
+            this.customWavesGroup.Size = new System.Drawing.Size(466, 369);
             this.customWavesGroup.TabIndex = 2;
             this.customWavesGroup.TabStop = false;
             this.customWavesGroup.Text = "Custom Waves";
             // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(385, 16);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(75, 23);
+            this.button4.TabIndex = 33;
+            this.button4.Text = "Clear";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(223, 16);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 32;
+            this.button2.Text = "Load";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(304, 16);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 30;
+            this.button1.Text = "Default";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
             // waveTextbox
             // 
             this.waveTextbox.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.waveTextbox.Location = new System.Drawing.Point(294, 331);
+            this.waveTextbox.Location = new System.Drawing.Point(294, 334);
             this.waveTextbox.Name = "waveTextbox";
             this.waveTextbox.ReadOnly = true;
             this.waveTextbox.Size = new System.Drawing.Size(90, 29);
             this.waveTextbox.TabIndex = 31;
+            this.waveTextbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // waveRemoveButton
             // 
             this.waveRemoveButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.waveRemoveButton.Location = new System.Drawing.Point(112, 331);
+            this.waveRemoveButton.Location = new System.Drawing.Point(112, 334);
             this.waveRemoveButton.Name = "waveRemoveButton";
             this.waveRemoveButton.Size = new System.Drawing.Size(100, 29);
             this.waveRemoveButton.TabIndex = 30;
@@ -374,7 +411,7 @@
             // waveAddButton
             // 
             this.waveAddButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.waveAddButton.Location = new System.Drawing.Point(6, 331);
+            this.waveAddButton.Location = new System.Drawing.Point(6, 334);
             this.waveAddButton.Name = "waveAddButton";
             this.waveAddButton.Size = new System.Drawing.Size(100, 29);
             this.waveAddButton.TabIndex = 29;
@@ -385,7 +422,7 @@
             // wavePrevButton
             // 
             this.wavePrevButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.wavePrevButton.Location = new System.Drawing.Point(218, 331);
+            this.wavePrevButton.Location = new System.Drawing.Point(218, 334);
             this.wavePrevButton.Name = "wavePrevButton";
             this.wavePrevButton.Size = new System.Drawing.Size(70, 29);
             this.wavePrevButton.TabIndex = 28;
@@ -396,7 +433,7 @@
             // waveNextButton
             // 
             this.waveNextButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.waveNextButton.Location = new System.Drawing.Point(390, 331);
+            this.waveNextButton.Location = new System.Drawing.Point(390, 334);
             this.waveNextButton.Name = "waveNextButton";
             this.waveNextButton.Size = new System.Drawing.Size(70, 29);
             this.waveNextButton.TabIndex = 27;
@@ -413,9 +450,9 @@
             this.groupBox3.Controls.Add(this.countNum);
             this.groupBox3.Controls.Add(this.label9);
             this.groupBox3.Controls.Add(this.maxNPCnum);
-            this.groupBox3.Location = new System.Drawing.Point(6, 22);
+            this.groupBox3.Location = new System.Drawing.Point(6, 37);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(454, 303);
+            this.groupBox3.Size = new System.Drawing.Size(454, 291);
             this.groupBox3.TabIndex = 0;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Wave";
@@ -425,6 +462,13 @@
             this.defaultNPCname.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.defaultNPCname.FormattingEnabled = true;
             this.defaultNPCname.Items.AddRange(new object[] {
+            "NewBorn_Bot",
+            "NewBorn_Runner_Bot",
+            "Crawler_Droid_Bot",
+            "NewBorn_Ranged_Bot",
+            "NewBorn_Tall_Bot",
+            "Security_Bot",
+            "NewBorn_Beserker_Bot",
             "BossRunner",
             "BossSecurity",
             "BossBeserker",
@@ -553,6 +597,11 @@
             // 
             this.spawnChanceNum.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.spawnChanceNum.Location = new System.Drawing.Point(163, 81);
+            this.spawnChanceNum.Maximum = new decimal(new int[] {
+            999,
+            0,
+            0,
+            0});
             this.spawnChanceNum.Name = "spawnChanceNum";
             this.spawnChanceNum.Size = new System.Drawing.Size(50, 29);
             this.spawnChanceNum.TabIndex = 20;
@@ -613,6 +662,11 @@
             // 
             this.countNum.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.countNum.Location = new System.Drawing.Point(113, 220);
+            this.countNum.Maximum = new decimal(new int[] {
+            999,
+            0,
+            0,
+            0});
             this.countNum.Name = "countNum";
             this.countNum.Size = new System.Drawing.Size(64, 29);
             this.countNum.TabIndex = 27;
@@ -631,6 +685,11 @@
             // 
             this.maxNPCnum.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.maxNPCnum.Location = new System.Drawing.Point(113, 257);
+            this.maxNPCnum.Maximum = new decimal(new int[] {
+            999,
+            0,
+            0,
+            0});
             this.maxNPCnum.Name = "maxNPCnum";
             this.maxNPCnum.Size = new System.Drawing.Size(64, 29);
             this.maxNPCnum.TabIndex = 23;
@@ -639,11 +698,15 @@
             // 
             this.saveFileDialog2.FileName = "waves.json";
             // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "waves.json";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(687, 399);
+            this.ClientSize = new System.Drawing.Size(680, 384);
             this.Controls.Add(this.customWavesGroup);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -708,5 +771,9 @@
         private Button waveAddButton;
         private TextBox waveTextbox;
         private SaveFileDialog saveFileDialog2;
+        private Button button4;
+        private Button button2;
+        private Button button1;
+        private OpenFileDialog openFileDialog1;
     }
 }
